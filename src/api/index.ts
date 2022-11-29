@@ -1,4 +1,4 @@
-import type { Product } from "@/types";
+import type { Product, ProductDetail } from "@/types";
 import data from "./mocks/products.json";
 
 export const api = {
@@ -8,12 +8,28 @@ export const api = {
         return {
           id: product.id,
           name: product.name,
-          productTagLine: product.productTagline,
-          shortDescription: product.shortDescription,
           logoLocation: product.logoLocation,
         };
       });
       resolve(products);
+    });
+  },
+  getProductDetail(id: number): Promise<ProductDetail> {
+    return new Promise((resolve, reject) => {
+      const product = data.products.find((product) => product.id === id);
+      console.log({ product });
+      if (!product) {
+        reject("Something went wrong");
+        return;
+      }
+      resolve({
+        id: product.id,
+        name: product.name,
+        logoLocation: product.logoLocation,
+        longDescription: product.longDescription,
+        shortDescription: product.shortDescription,
+        productTagLine: product.productTagline,
+      });
     });
   },
 };

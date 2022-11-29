@@ -2,6 +2,7 @@
 import { onMounted, ref } from "vue";
 import { api } from "@/api";
 import type { Product } from "@/types";
+import ProductCard from "@/components/ProductCard.vue";
 
 const productList = ref<Product[]>([]);
 
@@ -12,25 +13,16 @@ onMounted(() => {
   };
   fetchProductsFromApi();
 });
-
-const setFallbackImg = (event: Event) => {
-  const eventTarget = event.target as HTMLImageElement;
-  eventTarget.className = "error-image";
-  eventTarget.src = "fallback.svg";
-};
 </script>
 
 <template>
   <main>
     <div class="list">
-      <div class="list-item" v-for="product in productList" :key="product.id">
-        <div class="image-container">
-          <img :src="product.logoLocation" @error="setFallbackImg" />
-        </div>
-        <div>
-          {{ product.name }}
-        </div>
-      </div>
+      <ProductCard
+        v-for="product in productList"
+        :key="product.id"
+        :product="product"
+      />
     </div>
   </main>
 </template>
@@ -44,26 +36,5 @@ main {
   display: flex;
   flex-flow: row wrap;
   justify-content: center;
-}
-
-.list-item {
-  margin: 16px;
-  border: solid;
-  max-width: 700px;
-}
-
-.image-container {
-  max-height: 240px;
-  max-width: 640px;
-}
-
-img {
-  object-fit: cover;
-  max-width: 100%;
-  max-height: 100%;
-}
-.error-image {
-  height: 240px;
-  width: 640px;
 }
 </style>
