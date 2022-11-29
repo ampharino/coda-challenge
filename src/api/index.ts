@@ -1,7 +1,8 @@
+import type { Product } from "@/types";
 import data from "./mocks/products.json";
 
 export const api = {
-  getProducts() {
+  getProducts(): Promise<Product[]> {
     return new Promise((resolve) => {
       const products = data.products.map((product) => {
         return {
