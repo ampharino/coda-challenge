@@ -16,9 +16,9 @@ npm run test:unit
 ```
 
 ### Framework & Tools
-Vite
-Node18
-Vue 3
-Vue Router
-TypeScript
-Vue Testing Library
+- Vite
+- Node18
+- Vue 3
+- Vue Router
+- TypeScript
+- Vue Testing Library
