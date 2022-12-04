@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { RouterLink } from "vue-router";
+import SearchBox from "./SearchBox.vue";
 </script>
 
 <template>
@@ -11,6 +12,7 @@ import { RouterLink } from "vue-router";
             src="https://cdn1.codashop.com/S/content/mobile/images/codashop-logo-new-2x.png"
         /></RouterLink>
       </nav>
+      <SearchBox />
     </div>
   </header>
 </template>
@@ -28,5 +30,11 @@ img {
   object-fit: cover;
   max-height: 100%;
   max-width: 100%;
+}
+
+.wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 </style>
