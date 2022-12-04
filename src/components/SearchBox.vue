@@ -4,10 +4,11 @@ import NoResult from "./NoResult.vue";
 import { ref, watch } from "vue";
 import type { Product } from "@/types";
 import { api } from "@/api";
+import { useRoute } from "vue-router";
 
 const search = ref<string>("");
 const searchResult = ref<Product[]>([]);
-
+const route = useRoute();
 const filteredProducts = async () => {
   if (!search.value) {
     return [];
@@ -21,12 +22,28 @@ const filteredProducts = async () => {
 watch(search, async () => {
   searchResult.value = await filteredProducts();
 });
+
+const clearSearch = (e?: FocusEvent) => {
+  if (!e?.relatedTarget) {
+    search.value = "";
+  }
+};
+
+watch(
+  () => route.params.id,
+  () => clearSearch()
+);
 </script>
 
 <template>
   <div class="search-container">
     <label for="searchbar">Search for product:</label>
-    <input type="text" id="searchbar" v-model="search" />
+    <input
+      type="text"
+      id="searchbar"
+      v-model="search"
+      @blur.capture="clearSearch"
+    />
     <div v-if="search" class="result-container">
       <div v-if="searchResult.length">
         <SearchResult
