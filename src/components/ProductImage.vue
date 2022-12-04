@@ -5,7 +5,7 @@ defineProps<{
 const setFallbackImg = (event: Event) => {
   const eventTarget = event.target as HTMLImageElement;
   eventTarget.className = "error-image";
-  eventTarget.src = "fallback.svg";
+  eventTarget.src = "/fallback.svg";
 };
 </script>
 
